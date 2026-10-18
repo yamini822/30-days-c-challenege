@@ -1,0 +1,30 @@
+1.⁠ ⁠START the program.
+2.⁠ ⁠Declare the variables: choice, n and i as int; fact as long long; a, b, c, D, r1 and r2 as double.
+3.⁠ ⁠Repeat steps 4 to 8 using a do-while loop, so the menu always comes back after every operation.
+4.⁠ ⁠Display the menu: 1. Linear equation, 2. Factorial, 3. Quadratic equation, 4. Exit.
+5.⁠ ⁠Ask the user to enter a choice and read it into the variable choice.
+6.⁠ ⁠Use a switch statement on choice and do the matching case:
+  Case 1 - Linear equation (ax + b = 0):
+    a) Read the values of a and b.
+    b) If a is not equal to 0, calculate x = -b / a and print x.
+    c) Else if b is equal to 0, print "Infinitely many solutions" (0x + 0 = 0 is always true).
+    d) Else print "No solution" (0x + b = 0 can never be true when b is not 0).
+  Case 2 - Factorial (n!):
+    a) Read the value of n.
+    b) If n is less than 0 or greater than 12, print an error message and do not calculate.
+    c) Otherwise set fact = 1.
+    d) Run a for loop with i from 1 to n. In every round do: fact = fact * i.
+    e) Print n! = fact. (When n is 0 the loop does not run, so fact stays 1 and 0! = 1.)
+  Case 3 - Quadratic equation (ax^2 + bx + c = 0):
+    a) Read the values of a, b and c.
+    b) If a is 0, print "Not a quadratic equation" and go back to the menu (never divide by 0).
+    c) Otherwise calculate the discriminant D = b*b - 4*a*c.
+    d) If D > 0: calculate r1 = (-b + sqrt(D)) / (2a) and r2 = (-b - sqrt(D)) / (2a). Print the two distinct real roots.
+    e) Else if D = 0: calculate r1 = -b / (2a). Print the two equal real roots.
+    f) Else (D < 0): print "No real roots".
+  Case 4 - Exit: print a closing (goodbye) message.
+  Default - any other number: print an "Invalid choice" error message.
+7.⁠ ⁠After the switch ends, check the loop condition: is choice not equal to 4?
+8.⁠ ⁠If choice is not 4, go back to step 4 and show the menu again.
+9.⁠ ⁠If choice is 4, the loop ends. STOP  (the program ends only here, when the user chooses Exit).
+10.stop
