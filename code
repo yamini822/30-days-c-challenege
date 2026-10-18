@@ -1,0 +1,102 @@
+#include <stdio.h>   // printf() and scanf() for input and output
+#include <math.h>    // sqrt() for the square root (compile with -lm)
+
+int main(void) {
+    int choice, ret;   // choice = menu option, ret = result of scanf
+
+    // do-while: the menu is shown at least once and repeats until Exit
+    do {
+        // ---------- Show the menu ----------
+        printf("\n===== EQUATION SOLVER+ =====\n");
+        printf("1. Solve linear equation (ax + b = 0)\n");
+        printf("2. Calculate factorial (n!)\n");
+        printf("3. Solve quadratic equation (ax^2 + bx + c = 0)\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+
+        // ---------- Read the choice safely ----------
+        ret = scanf("%d", &choice);          // scanf returns 1 if a number was read
+        if (ret == EOF) {
+            choice = 4;                      // no more input, so exit
+        } else if (ret != 1) {               // the user typed a letter, not a number
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);   // throw away bad input
+            choice = 0;                      // 0 goes to the default (invalid) case
+        }
+
+        switch (choice) {
+
+        // ----- CASE 1: Linear equation  ax + b = 0 -----
+        case 1: {
+            double a, b;
+            printf("Enter a and b: ");
+            if (scanf("%lf %lf", &a, &b) != 2) {
+                printf("Invalid input.\n");
+                break;
+            }
+            if (a != 0)                                  // safe to divide
+                printf("x = %.2f\n", (0 - b) / a);       // x = -b / a
+            else if (b == 0)                             // 0x + 0 = 0
+                printf("Infinitely many solutions.\n");
+            else                                         // 0x + b = 0, b is not 0
+                printf("No solution.\n");
+            break;
+        } 
+ // ----- CASE 2: Factorial  n! -----
+        case 2: {
+            int n, i;
+            long long fact = 1;                          // product starts at 1
+            printf("Enter n (0 to 12): ");
+            if (scanf("%d", &n) != 1) {
+                printf("Invalid input.\n");
+                break;
+            }
+            if (n < 0 || n > 12) {                       // allowed range is 0 to 12
+                printf("Error: n must be between 0 and 12.\n");
+            } else {
+                for (i = 1; i <= n; i++)                 // multiply 1 x 2 x ... x n
+                    fact = fact * i;
+                printf("%d! = %lld\n", n, fact);         // for n = 0 the loop is
+            }                                            // skipped, so 0! = 1
+            break;
+        }
+
+        // ----- CASE 3: Quadratic equation  ax^2 + bx + c = 0 -----
+        case 3: {
+            double a, b, c, D, r1, r2;
+            printf("Enter a, b and c: ");
+            if (scanf("%lf %lf %lf", &a, &b, &c) != 3) {
+                printf("Invalid input.\n");
+                break;
+            }
+            if (a == 0) {                                // a must not be 0
+                printf("Not a quadratic equation (a cannot be 0).\n");
+                break;
+            }
+            D = b * b - 4 * a * c;                       // discriminant
+            if (D > 0) {                                 // two different roots
+                r1 = (0 - b + sqrt(D)) / (2 * a);
+                r2 = (0 - b - sqrt(D)) / (2 * a);
+                printf("Two distinct real roots: %.2f and %.2f\n", r1, r2);
+            } else if (D == 0) {                         // one repeated root
+                r1 = (0 - b) / (2 * a);
+                printf("Two equal real roots: x = %.2f\n", r1);
+            } else {                                     // D < 0
+                printf("No real roots (D < 0).\n");
+            }
+            break;
+        }
+
+        // ----- CASE 4: Exit -----
+        case 4:
+             printf("Thank you for using Equation Solver+. Goodbye!\n");
+            break;
+
+        // ----- Any other number: error, then the menu is shown again -----
+        default:
+            printf("Invalid choice! Please enter 1-4.\n");
+        }
+    } while (choice != 4);   // repeat until the user chooses Exit
+
+    return 0;
+}
